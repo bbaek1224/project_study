@@ -21,6 +21,34 @@
             now()
         )
     </insert>
+    <update id="changeStatus">
+        update
+            todo_tb
+        set
+            status = if(status = 1, 2, 1)
+        where
+            todoId = #{todoId}
+    </update>
+    <update id="modifyTodoByTodoId">
+        update
+            todo_tb
+        set
+            title = #{title},
+            content = #{content},
+            todoDateTime = #{todoDateTime},
+            important = #{important},
+            busy = #{busy},
+            status = #{status}
+        where
+            todoId = #{todoId}
+    </update>
+    <delete id="deleteByTodoId">
+        delete
+        from
+            todo_tb
+        where
+            todoId = #{todoId}
+    </delete>
     <select id="findAll" resultType="com.study.todolist.entity.Todo">
         select
             todoId,
@@ -66,7 +94,7 @@
             from
                 todo_tb
             where
-                status = 1
+                status = 1 or 2
                 and busy = 1) as `busy`,
 
             (select

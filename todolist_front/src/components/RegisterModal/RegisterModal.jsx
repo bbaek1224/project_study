@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import * as s from "./style";
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ReactModal from 'react-modal';
 import { useRecoilState } from 'recoil';
 import { registerModalAtom } from '../../atoms/modalAtoms';
@@ -25,6 +24,7 @@ function RegisterModal({ containerRef }) {
                 overlay: {
                     position: "absolute",
                     backgroundColor: "transparent",
+                    zIndex: 50
                 },
                 content: {
                     inset: "auto 0 0",

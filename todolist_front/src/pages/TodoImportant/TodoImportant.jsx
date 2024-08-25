@@ -14,7 +14,7 @@ import { modifyTodoAtom, selectedCalendarTodoAtom } from '../../atoms/calendarAt
 import ConfirmButtonTop from '../../components/ConfirmButtonTop/ConfirmButtonTop';
 import SubPageContainer from '../../components/SubPageContainer/SubPageContainer';
 
-function TodoAll(props) {
+function TodoImportant(props) {
     const [ todolistAll ] = useRecoilState(todolistAtom);
     const [ selectedTodo, setSelectedTodo ] = useRecoilState(selectedCalendarTodoAtom);
     const [ modifyTodo, setModifyTodo ] = useRecoilState(modifyTodoAtom);
@@ -41,6 +41,10 @@ function TodoAll(props) {
         const tempCalendarData = {};
  
         for(let todo of todolistAll.todolist) {
+            if(todo.important !== 1) {
+                continue;   
+            }
+
             const dateTime = todo.todoDateTime;
             const year = dateTime.slice(0, 4);
             const month = dateTime.slice(5, 7);
@@ -68,7 +72,6 @@ function TodoAll(props) {
     }
 
     const modifySubmit = () => {
-        console.log(modifyTodo);
         setSelectedTodo(0);
     }
 
@@ -81,7 +84,7 @@ function TodoAll(props) {
                         ? <BackButtonTop setShow={setShow} />
                         : <ConfirmButtonTop onCancel={modifyCancel} onSubmit={modifySubmit} disabled={submitButtonDisabled} />
                     }
-                    <PageTitle title={MENUS.all.title} color={MENUS.all.color} />
+                    <PageTitle title={MENUS.important.title} color={MENUS.important.color} />
                     <TodoCalendar calendarData={calendarData} />
                     <RegisterTodoButton />
                 </div>
@@ -90,4 +93,4 @@ function TodoAll(props) {
     );
 }
 
-export default TodoAll;
+export default TodoImportant;

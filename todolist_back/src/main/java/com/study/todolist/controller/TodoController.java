@@ -1,11 +1,14 @@
 package com.study.todolist.controller;
 
 import com.study.todolist.dto.request.todo.ReqAddTodoDto;
+import com.study.todolist.dto.request.todo.ReqModifyTodoDto;
 import com.study.todolist.service.TodoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 
 @Slf4j
 @RestController
@@ -31,6 +34,28 @@ public class TodoController {
         return ResponseEntity.ok().body(todoService.getTodoCounts());
     }
 
+    @PutMapping("/todo/{todoId}/status")
+    public ResponseEntity<?> changeStatus(@PathVariable int todoId) {
+        return ResponseEntity.ok().body(todoService.changeStatus(todoId));
+    }
+
+    /**
+     * ReqModifyTodoDto
+     * modifyTodo(todoService)
+     * modifyTodoByTodoId(todoMapper)
+     */
+
+    @PutMapping("/todo/{todoId}")
+    public ResponseEntity<?> modify(@RequestBody ReqModifyTodoDto dto) {
+        log.info("{}", dto);
+        log.info("{}", LocalDateTime.parse(dto.getTodoDateTime()));
+        return ResponseEntity.ok().body(todoService.modifyTodo(dto));
+    }
+
+    @DeleteMapping("/todo/{todoId}")
+    public ResponseEntity<?> delete(@PathVariable int todoId)  {
+        return ResponseEntity.ok().body(todoService.deleteTodo(todoId));
+    }
 }
 
 

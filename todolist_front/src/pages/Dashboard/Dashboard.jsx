@@ -4,7 +4,6 @@ import DateTitle from "../../components/Dashboard/DateTitle/DateTitle";
 import MenuList from "../../components/Dashboard/MenuList/MenuList";
 import Search from "../../components/Dashboard/Search/Search";
 import MainContainer from "../../components/MainContainer/MainContainer";
-import PageAnimationLayout from "../../components/PageAnimationLayout/PageAnimationLayout";
 import RegisterTodoButton from "../../components/RegisterTodoButton/RegisterTodoButton";
 import * as s from "./style";
 import TodoAll from "../TodoAll/TodoAll";
@@ -12,6 +11,8 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import { refreshTodolistAtom, todolistAtom } from "../../atoms/todolistAtoms";
 import { getTodoAllApi, getTodoCountsApi } from "../../apis/todoApis/getTodoApi";
 import { useEffect } from "react";
+import TodoComplete from "../TodoComplete/TodoComplete";
+import TodoImportant from "../TodoImportant/TodoImportant";
 
 function Dashboard(props) {
     const setTodolistAll = useSetRecoilState(todolistAtom);
@@ -49,6 +50,8 @@ function Dashboard(props) {
             </div>
             <Routes>
                 <Route path="/all" element={<TodoAll />} />
+                <Route path="/complete" element={<TodoComplete />} />
+                <Route path="/important" element={<TodoImportant />} />
             </Routes>
         </MainContainer>
     );

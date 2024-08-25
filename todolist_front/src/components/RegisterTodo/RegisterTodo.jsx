@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { useSetRecoilState } from "recoil";
 import * as s from "./style";
-import { registerModalAtom } from "../../atoms/modalAtoms";
 import ReactSelect from "react-select";
 import { useEffect, useState } from "react";
 import { addTodoApi } from "../../apis/todoApis/addTodoApi";
@@ -65,9 +64,8 @@ function RegisterTodo({closeModal}) {
         }));
     }
 
-    const handleSubmitClick = () => {
-        console.log(todo);
-        addTodoApi(todo);
+    const handleSubmitClick = async () => {
+        await addTodoApi(todo);
         setRefresh(true);
         closeModal();
     }
